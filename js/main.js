@@ -2,7 +2,7 @@ window.onload = init;
 
 function init() {
 		printButton = document.getElementById("printButton");
-		printButton.addEventListener("click", laserPrinter.print);
+		printButton.addEventListener("click", laserPrinter.print.bind(laserPrinter));
 	}
 
 //var toner = document.getElementById("tonerLevel").value;
