@@ -1,25 +1,28 @@
-var laserPrinter = {
-	toner: 5,
-  	//toner: document.getElementById("tonerLevel").value,
-  	//I would like to be able to have the user enter a value, but I could not get it
-  	//to work here in my object.
-    password: "cats",
+window.onload = init;
 
-  print: function() {
+function init() {
+		printButton = document.getElementById("printButton");
+		printButton.addEventListener("click", laserPrinter.print);
+	}
+
+var laserPrinter = {
+    password: "cats",
+  	print: function print() {
+  		var self = this;
+  		var userToner = document.getElementById("tonerLevel").value;
 		if (!document.getElementById("onButton").checked) {
 			document.getElementById("printerMessages").innerHTML = ("You cannot print because the printer is off.");
 			return;
-		} else if (document.getElementById("wifiPassword").value !== this.password) {
+		} else if (document.getElementById("wifiPassword").value !== laserPrinter.password) {
 			document.getElementById("printerMessages").innerHTML = ("You cannot print because you are not connected to WiFi.");
 			return;
-		} else if (this.toner == 0) {
+		} else if (userToner == 0) {
 			document.getElementById("printerMessages").innerHTML = ("You cannot print because you are out of toner.");
 			return;
 		} else {
 			document.getElementById("printerMessages").innerHTML = ("You print your document.");
-			this.toner--;
-        document.getElementById("printerSupplies").innerHTML = ("The printer has " + this.toner + " units of toner left.");
-			return;
+			userToner--;
+		    document.getElementById("printerSupplies").innerHTML = ("The printer has " + userToner + " units of toner left.");
 		}
 	},
 };
